@@ -11,11 +11,13 @@ public class BallMovement : MonoBehaviour
     [SerializeField] float unStickPower;
     [SerializeField] Transform bottomEdge;
     Rigidbody2D rb;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         InitializeMovement();
     }
 
@@ -42,6 +44,7 @@ public class BallMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "Player") {
+            
             Vector2 playerPos = other.transform.position;
             float curSpeed = rb.velocity.magnitude;
 
@@ -50,5 +53,10 @@ public class BallMovement : MonoBehaviour
 
             rb.velocity = newSpeed;
         }
+    }
+
+    public void playClip()
+    {
+        audioSource.PlayOneShot(audioSource.clip, 1f);
     }
 }
