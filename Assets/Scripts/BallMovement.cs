@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BallMovement : MonoBehaviour
 {
     [SerializeField] float startPower;
     [SerializeField] float unStickThreshold;
     [SerializeField] float unStickPower;
+    [SerializeField] Transform bottomEdge;
     Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -20,10 +22,15 @@ public class BallMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // if (Mathf.Abs(rb.velocity.y) < unStickThreshold) {
-        //     float vertForce = unStickPower * Mathf.Sign(rb.velocity.y);
-        //     rb.AddForce(new Vector2(0, vertForce));
-        // }
+        if (Mathf.Abs(rb.velocity.y) < unStickThreshold) {
+            float vertForce = unStickPower * Mathf.Sign(rb.velocity.y);
+            rb.AddForce(new Vector2(0, vertForce));
+        }
+
+        if (transform.position.y < bottomEdge.position.y) { // Ball off screen
+            string name = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(name);
+        }
     }
 
     void InitializeMovement()
