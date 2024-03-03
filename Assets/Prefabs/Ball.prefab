@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1225249729786905004}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,5 +162,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPower: 500
-  unStickThreshold: 0
-  unStickPower: 0
+  unStickThreshold: 1
+  unStickPower: 5
