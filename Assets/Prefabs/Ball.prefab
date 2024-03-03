@@ -161,4 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68c88eabc9dc463092c4f51fd006d5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPower: 750
+  startPower: 500
+  unStickThreshold: 0
+  unStickPower: 0
