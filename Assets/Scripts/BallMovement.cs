@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
     [SerializeField] float startPower;
+    [SerializeField] float unStickThreshold;
+    [SerializeField] float unStickPower;
     Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -15,9 +18,12 @@ public class BallMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        // if (Mathf.Abs(rb.velocity.y) < unStickThreshold) {
+        //     float vertForce = unStickPower * Mathf.Sign(rb.velocity.y);
+        //     rb.AddForce(new Vector2(0, vertForce));
+        // }
     }
 
     void InitializeMovement()
@@ -25,5 +31,17 @@ public class BallMovement : MonoBehaviour
         float angle = Random.Range(5 * Mathf.PI / 4, 7 * Mathf.PI / 4);
         Vector2 forceVector = new Vector2(startPower * Mathf.Cos(angle), startPower * Mathf.Sin(angle));
         rb.AddForce(forceVector);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag == "Player") {
+            Vector2 playerPos = other.transform.position;
+            float curSpeed = rb.velocity.magnitude;
+
+            Vector2 differential = new Vector2(transform.position.x - playerPos.x, transform.position.y - playerPos.y);
+            Vector2 newSpeed = curSpeed * differential.normalized;
+
+            rb.velocity = newSpeed;
+        }
     }
 }
