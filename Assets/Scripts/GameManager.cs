@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     int numEnemies;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         numEnemies = 0;
     }
