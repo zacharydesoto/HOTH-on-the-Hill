@@ -44,4 +44,9 @@ public class PlayerMovement : MonoBehaviour
     {
         moveVal = context.ReadValue<Vector2>();
     }
+
+    public void OnQuit(InputAction.CallbackContext context)
+    {
+        Application.Quit();
+    }
 }

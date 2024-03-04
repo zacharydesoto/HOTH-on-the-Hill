@@ -57,6 +57,7 @@ public class BallMovement : MonoBehaviour
 
     public void playClip()
     {
+        audioSource.pitch = Random.Range(0.5f, 1.75f);
         audioSource.PlayOneShot(audioSource.clip, 1f);
     }
 }
